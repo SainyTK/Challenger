@@ -4,10 +4,15 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextSwitcher;
 import android.widget.TextView;
+import android.widget.ViewSwitcher.ViewFactory;
+import android.view.Gravity;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
-import java.util.Random;
 
 public class Main2Activity extends Activity {
 
@@ -35,50 +40,78 @@ public class Main2Activity extends Activity {
 
         r = (int) (num*Math.random()+start);
 
+        final EditText inputField = findViewById(R.id.inputField);
+        final TextView roundValue = findViewById(R.id.roundValue);
+        final TextView player = findViewById(R.id.player);
+
+        final TextSwitcher hint = findViewById(R.id.hint);
+        hint.setFactory(mFactory);
+        Animation in = AnimationUtils.loadAnimation(this,
+                android.R.anim.fade_in);
+        Animation out = AnimationUtils.loadAnimation(this,
+                android.R.anim.fade_out);
+        hint.setInAnimation(in);
+        hint.setOutAnimation(out);
+
+        Button btn = findViewById(R.id.ansBtn);
+
+        btn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                String ans = inputField.getText().toString();
+                String playerNum = player.getText().toString();
+                String round = roundValue.getText().toString();
+
+                if(!ans.equals(""))
+                {
+                    int ansVal = Integer.parseInt(ans);
+                    int roundVal = Integer.parseInt(round);
+                    String hintStr = new String();
+                    if(p==0)
+                    {
+                        player.setText(String.valueOf(r));
+                        switch (checkAns(ansVal,r))
+                        {
+                            case 0: win("PLAYER 1",round); break;
+                            case 1: hintStr = "Smaller!!";break;
+                            case 2: hintStr = "Bigger!!";break;
+                        }
+                        p=1;
+                        player.setText("P2 : ");
+                    }
+                    else if(p==1)
+                    {
+                        switch (checkAns(ansVal,r))
+                        {
+                            case 0: win("PLAYER 2",round); break;
+                            case 1: hintStr = "Smaller!!"; break;
+                            case 2: hintStr = "Bigger!!"; break;
+                        }
+                        p=0;
+                        player.setText("P1 : ");
+                        roundVal++;
+                        roundValue.setText(String.valueOf(roundVal));
+                    }
+                    hint.setText(hintStr);
+                    hint.setCurrentText(hintStr);
+                }
+            }
+        });
+
+
     }
 
-    public  void answer(View v)
-    {
-        EditText inputField = findViewById(R.id.inputField);
-        TextView roundValue = findViewById(R.id.roundValue);
-        TextView player = findViewById(R.id.player);
-        TextView hint = findViewById(R.id.hint);
 
-        String ans = inputField.getText().toString();
-        String playerNum = player.getText().toString();
-        String round = roundValue.getText().toString();
-
-        if(ans!="")
-        {
-            int ansVal = Integer.parseInt(ans);
-            int roundVal = Integer.parseInt(round);
-            if(p==0)
-            {
-                player.setText(String.valueOf(r));
-                switch (checkAns(ansVal,r))
-                {
-                    case 0: win("PLAYER 1",round); break;
-                    case 1: hint.setText("Smaller!!"); break;
-                    case 2: hint.setText("Bigger!!"); break;
-                }
-                p=1;
-                player.setText("P2 : ");
-            }
-            else if(p==1)
-            {
-                switch (checkAns(ansVal,r))
-                {
-                    case 0: win("PLAYER 2",round); break;
-                    case 1: hint.setText("Smaller!!"); break;
-                    case 2: hint.setText("Bigger!!"); break;
-                }
-                p=0;
-                player.setText("P1 : ");
-                roundVal++;
-                roundValue.setText(String.valueOf(roundVal));
-            }
+    private ViewFactory mFactory = new ViewFactory() {
+        @Override
+        public View makeView() {
+            // Create a new TextView
+            TextView t = new TextView(Main2Activity.this);
+            t.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL);
+            t.setTextAppearance(Main2Activity.this, android.R.style.TextAppearance_Large);
+            return t;
         }
-    }
+    };
 
     public int checkAns(int x,int ans)
     {

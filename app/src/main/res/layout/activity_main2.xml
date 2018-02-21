@@ -31,7 +31,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <TextSwitcher
         android:id="@+id/hint"
         android:text="Start!!"
         android:textSize="40sp"
@@ -70,7 +70,6 @@
 
         <Button
             android:id="@+id/ansBtn"
-            android:onClick="answer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="SEND"
