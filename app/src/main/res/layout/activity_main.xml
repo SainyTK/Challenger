@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.andoid.tk.challenger.MainActivity">
+
+    <TextView
+        android:id="@+id/head1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:fontFamily="@font/font1"
+        android:text="Random "
+        android:textSize="35sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/head2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="130dp"
+        android:fontFamily="@font/font1"
+        android:text="Challenger "
+        android:textSize="35sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/inputRange"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@+id/head2">
+
+        <TextView
+            android:id="@+id/range"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="Range : "
+            android:textSize="20sp"
+            app:layout_constraintRight_toLeftOf="@+id/startValue" />
+
+        <EditText
+            android:id="@+id/startValue"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="0"
+            android:textAlignment="center"
+            app:layout_constraintBaseline_toBaselineOf="@+id/range"
+            app:layout_constraintRight_toLeftOf="@+id/to" />
+
+        <TextView
+            android:id="@+id/to"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:text="to"
+            android:textSize="20sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <EditText
+            android:id="@+id/stopValue"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="100"
+            android:textAlignment="center"
+            app:layout_constraintBaseline_toBaselineOf="@+id/to"
+            app:layout_constraintLeft_toRightOf="@+id/to" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <Button
+        android:id="@+id/startBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:onClick="start"
+        android:text="Start"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/inputRange" />
+
+</android.support.constraint.ConstraintLayout>
