@@ -133,6 +133,7 @@ public class Main2Activity extends Activity {
     {
         Intent newActivity = new Intent(Main2Activity.this,Main3Activity.class);
 
+        newActivity.putExtra("ans",String.valueOf(r));
         newActivity.putExtra("player",player);
         newActivity.putExtra("round",round);
 

@@ -16,12 +16,15 @@ public class Main3Activity extends AppCompatActivity {
         Intent previous = getIntent();
         String player = previous.getStringExtra("player");
         String round = previous.getStringExtra("round");
+        String ans = previous.getStringExtra("ans");
 
         TextView playerTv = findViewById(R.id.player);
         TextView roundTv = findViewById(R.id.roundValue);
+        TextView ansTv = findViewById(R.id.ans);
 
         playerTv.setText(player);
         roundTv.setText(round);
+        ansTv.setText(ans);
     }
 
     public void restart(View v)
